@@ -35,6 +35,17 @@ This page is for developers deciding between a workflow and an agent, for people
 with Claude Managed Agents (Q Lens is a complete working example), and for anyone who wants
 their own weekly digest from their own list of sources.
 
+Where to look:
+
+| I want to | Look at |
+|---|---|
+| see what the two notes look like | [examples/2026-11-15/](examples/2026-11-15/): one week's notes from both programs |
+| compare cost, time and contents | [What three weeks show](#what-three-weeks-show), then [benchmark/](benchmark/) |
+| run Lantern, for free at first | [Try it](#try-it), then [lantern/README.md](lantern/README.md) |
+| run Q Lens in my Anthropic account | [q-lens/README.md](q-lens/README.md) |
+| know where the output goes | [Where the output goes](#where-the-output-goes) |
+| read the design | [lantern/docs/design.md](lantern/docs/design.md) and Q Lens's [weekly instructions](q-lens/skills/curate-weekly/SKILL.md) |
+
 | Word | Meaning here |
 |---|---|
 | **workflow** | A program whose steps are fixed in code; the model fills in parts of them |
@@ -48,7 +59,7 @@ their own weekly digest from their own list of sources.
 | **token** | The unit AI models are billed in, roughly three quarters of a word |
 | **taste file** | `lantern/taste.yaml`: what the reader is working on, and a list of traits that add or remove points, such as "written by the people who did the work" (+1) or "mainly sells a product" (-3) |
 | **primary source** | The original announcement or paper, as opposed to an article about it |
-| **vault** | A folder of Markdown notes used with the note-taking app Obsidian. Both programs save the note there |
+| **vault** | The folder the notes are saved to: any folder, or a vault of the note-taking app Obsidian |
 
 API keys stay in the macOS Keychain, the system's password store, and never in files. The
 agent's sandbox can reach only a fixed list of websites. [SECURITY.md](SECURITY.md) gives the
@@ -97,44 +108,71 @@ Three weeks are an early signal, not a verdict. The details for each week are in
 
 ## Try it
 
-Lantern needs a Mac and [uv](https://docs.astral.sh/uv/), a tool that installs Python and
-the project's dependencies. Everything in this first block is free:
+Lantern is made for a Mac and needs [uv](https://docs.astral.sh/uv/), a tool that installs
+Python and the project's dependencies. Everything in this first block is free: no model is
+called.
 
 ```bash
-cd lantern
+git clone https://github.com/adityakunar/lantern-and-q-lens.git
+cd lantern-and-q-lens/lantern
 uv sync --locked
-uv run pytest                                      # the tests: no internet, no model
-cp lantern.example.yaml ~/.config/lantern.yaml     # then set your vault and model
-uv run lantern check ai                            # check the settings, try every source once
-uv run lantern run ai-weekly --dry-run --no-model  # a plainer note ranked by keywords, not saved
+uv run pytest                                       # the tests: no internet, no model
+cp lantern.example.yaml lantern.yaml                # settings that keep everything in output/
+mkdir -p output/notes
+uv run lantern check ai                             # check the settings, try every source once
+uv run lantern run ai-weekly --dry-run --no-model   # print a note ranked by keywords, save nothing
+uv run lantern run ai-weekly --no-model             # save that note to output/notes/
 ```
 
 The next two call the model, and each costs about as much as one note:
 
 ```bash
 uv run lantern run ai-weekly --dry-run   # the full note, printed and not saved
-uv run lantern run ai-weekly             # the full note, saved to your vault
+uv run lantern run ai-weekly             # the full note, saved
 ```
 
 A dry run skips only the saving: the model still judges every item and writes the note. In
 the live test it took about 225 seconds and cost about $0.40 with Claude Sonnet 5.5. The
-model can be a hosted one or one running on your Mac, which costs nothing per run. See
-[lantern/README.md](lantern/README.md).
+model can be a hosted one or one running on your Mac, which costs nothing per run.
+[lantern/README.md](lantern/README.md) shows how to set either up.
 
 Q Lens needs an Anthropic account with access to Managed Agents and Anthropic's `ant`
 command-line tool. Setting it up creates resources in your account that cost money when
 they run; each run is limited to $5. See [q-lens/README.md](q-lens/README.md).
 
+## Where the output goes
+
+Both programs write the note as a Markdown file on your computer. Nothing either program
+produces is committed to this repository.
+
+- **Lantern**, with the example settings, writes everything into `lantern/output/`, which git
+  ignores: each week's note under `output/notes/Lantern/AI news/Lantern/`, and its library,
+  a SQLite file with every item, every decision and its reason, and every run. Point the
+  settings at your Obsidian vault and the notes go there instead.
+- **Q Lens** saves the note in its cloud run, and keeps a few memory files in your Anthropic
+  account between runs. `q-lens/fetch-latest-note.sh <folder>` downloads the note to
+  `<folder>/Lantern/AI news/Agent/` and adds the run's cost and time to it.
+- Fetch Q Lens's note into `lantern/output/notes` and `uv run lantern benchmark` puts the two
+  side by side in one table.
+
+Each note starts with a block of properties that records its own run: sources, items, time,
+tokens and cost. The details, with file trees, are in
+[lantern/README.md](lantern/README.md#where-the-output-goes) and
+[q-lens/README.md](q-lens/README.md#where-the-output-goes).
+[examples/](examples/) holds copies of one week's notes, and
+[benchmark/README.md](benchmark/README.md) is a summary written by hand.
+
 ## Small enough to follow
 
 ```text
-lantern/     the workflow: code, tests, the list of sources, settings and the written design
+lantern/     the workflow: code, tests, the list of sources, settings and its design
 q-lens/      the agent: its instructions, schedule, sandbox settings and memory
-benchmark/   cost, time and contents of each week's two notes
+benchmark/   cost, time and contents of each week's two notes, written up by hand
+examples/    the notes both programs wrote on 15 November 2026
 ```
 
-Start with [lantern/src/lantern/run.py](lantern/src/lantern/run.py): the four steps of the
-workflow in one function. On the agent side, start with the
+Start with [lantern/src/lantern/run.py](lantern/src/lantern/run.py): the steps of one run
+in one function. On the agent side, start with the
 [instructions it follows each week](q-lens/skills/curate-weekly/SKILL.md).
 
 The taste file is shared by both programs. The one published here is a made-up example.

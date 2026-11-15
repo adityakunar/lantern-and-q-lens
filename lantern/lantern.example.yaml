@@ -1,6 +1,14 @@
-# Copy to lantern.yaml (not committed) and adjust for your Mac.
-vault: ~/Documents/Obsidian/Main
-library: ~/Library/Application Support/Lantern/library.sqlite
+# Lantern's settings. Copy this file to lantern.yaml in this folder (git ignores it):
+#   cp lantern.example.yaml lantern.yaml && mkdir -p output/notes
+# Run lantern from this folder: relative paths below are read from the current folder.
+#
+# Where notes go. The folder must exist. Point it at your Obsidian vault if you use one
+# (for example ~/Documents/Obsidian/Main); Obsidian is optional.
+vault: output/notes
+# Lantern's memory of every item, decision and run (a SQLite file, created when needed).
+library: output/library.sqlite
+# The model that judges items and writes the note. Not needed with --no-model, which
+# writes a plainer note ranked by keywords. This block is a model running on your Mac:
 model:
   base_url: http://127.0.0.1:9000/v1
   name: bonsai2-27b-2bit

@@ -1,14 +1,26 @@
 # Q Lens
 
-A Claude Managed Agent that writes the same weekly AI news note as [Lantern](../lantern/), in
-the cloud instead of on your Mac. Everything here is declarative files that you sync to your
-own Anthropic workspace with the `ant` CLI. Managed Agents is a beta product, so commands
-and file schemas may change.
+Q Lens writes the same weekly AI news note as [Lantern](../lantern/), but as an **agent**: an
+AI model gets the list of sources, a description of the reader with scoring rules, and a
+spending limit, and decides the rest itself: which articles to open in full, what to search
+the web for, and which stories belong together. It runs in the cloud as a Claude Managed
+Agent, Anthropic's hosted service for running agents on a schedule. The
+[top-level README](../README.md) compares what each program costs and finds.
 
-Lantern follows fixed steps and asks a model to score and write. Q Lens gets the sources, a
-description of the reader with scoring rules, and a spending limit, and decides the rest itself: what to open in full, what to search for and
-which stories belong together. The [top-level README](../README.md) compares what each one
-costs and finds.
+Everything here is plain files that you upload to your own Anthropic account with `ant`,
+Anthropic's command-line tool. Managed Agents is a beta product, so commands and file formats
+may change. Setting it up creates resources in your account that cost money when they run;
+each run is limited to $5.
+
+Where to look:
+
+| I want to | Look at |
+|---|---|
+| see a note it wrote | [examples/2026-11-15/q-lens.md](../examples/2026-11-15/q-lens.md) |
+| read the instructions it follows each week | [skills/curate-weekly/SKILL.md](skills/curate-weekly/SKILL.md) |
+| set it up in my account | [Set up](#set-up) |
+| know where its files go | [Where the output goes](#where-the-output-goes) |
+| change the sources, the reader or the schedule | [Change what you get](#change-what-you-get) |
 
 ## Words used here
 
@@ -55,15 +67,60 @@ ant apply .                      # 4. create it in your workspace
 yours and is git-ignored. Keep it next to these files and keep the file names as they are:
 IDs are stored by path, so a renamed file becomes a new resource.
 
-Run it now and fetch the note:
+Run it now, wait about five minutes for the run to finish, then fetch the note. The simplest
+place for it is Lantern's output folder, so that `lantern benchmark` can compare the two
+notes:
 
 ```sh
 ant beta:deployments run --deployment-id <deployment id from claude-lock.json>
-./fetch-latest-note.sh           # vault path is read from ~/.config/lantern.yaml
+mkdir -p ../lantern/output/notes
+./fetch-latest-note.sh ../lantern/output/notes   # any existing folder works
 ```
 
-`scripts/install-auto-fetch.sh` installs a macOS LaunchAgent that fetches each new note once,
-every hour, at login and after wake. `scripts/auto-fetch.sh --status` prints its health record.
+Run `fetch-latest-note.sh` from this `q-lens/` folder: it reads the deployment's ID from
+`claude-lock.json`. Without a folder argument, it uses the `vault:` line of
+`~/.config/lantern.yaml`.
+
+`scripts/install-auto-fetch.sh` installs a macOS LaunchAgent, a background job, that fetches
+each new note once, every hour, at login and after wake. It reads the vault from
+`~/.config/lantern.yaml`. `scripts/auto-fetch.sh --status` prints its health record.
+
+## Where the output goes
+
+During a run, everything happens in a temporary cloud machine:
+
+- The agent saves the note to `/mnt/session/outputs/ai-weekly-<year>-W<week>.md`. The service
+  keeps it as a file of that run (a session) in your account.
+- The memory store keeps four files in its `ai/` folder between runs (see [Memory](#memory)).
+  Everything else on the machine is deleted when the run ends.
+
+`fetch-latest-note.sh` finds the latest run of the deployment, downloads its note and saves it
+on your computer as:
+
+```text
+<folder>/Lantern/AI news/Agent/<year>-W<week>.md
+```
+
+It then runs `scripts/stamp-run-stats.py`, which adds the run's record to the note's
+properties: `run_session` (the run's ID), `run_model`, `run_seconds` (time the agent was
+working), `run_wall_seconds`, `run_tokens_in`, `run_tokens_out` and `run_cost_usd`. These are
+the properties `lantern benchmark` reads. If you fetch into Lantern's output folder, the two
+notes sit side by side:
+
+```text
+lantern/output/notes/Lantern/AI news/
+├── Lantern/2026-W46.md
+└── Agent/2026-W46.md
+```
+
+The automatic fetch also keeps, in `~/Library/Application Support/Lantern/`, a health record
+(`curator-fetch.json`), the runs already fetched (`curator-fetched-sessions.txt`, so a note
+you edit is never overwritten) and the runs still waiting for a note
+(`curator-fetch-tries.txt`). Its log is `~/Library/Logs/Lantern/curator-fetch.log`.
+
+`ant apply` writes `claude-lock.json` here with the IDs of your resources; git ignores it.
+Nothing a run produces is committed to this repository. The note in
+[examples/](../examples/) is a copy.
 
 ## Memory
 
