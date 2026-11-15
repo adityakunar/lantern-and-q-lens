@@ -26,6 +26,64 @@ How to read the tables:
 The two programs score in similar but not identical ways, so compare what ended up in the
 notes, not the scores.
 
+## Note of Sunday 15 November 2026 (news from 8 to 15 November)
+
+This run was the live test of this published repository. Both programs were started from a
+fresh copy of it, downloaded from GitHub, with the example taste file that is shipped here
+instead of the reader's own. Q Lens started with an empty memory, so it knew nothing about
+earlier weeks. The two weeks below ran on the author's own setup, so this week is not an
+exact repeat of them.
+
+| | Lantern | Q Lens |
+|---|---:|---:|
+| Cost | $0.40 | $2.11 (5.3 times as much) |
+| Time | 226 seconds | 253 seconds |
+| Calls to the model | 23 | not reported by the service |
+| Tokens in / out | 73,000 / 25,000 | 2,012,000 / 21,000 |
+| Items judged / picked | 211 / 12 | 215 / 14 |
+| Stories / quick links | 5 / 1 | 6 / 8 |
+| Sources that could not be read | 1 of 64 | 2 |
+| Articles read in full | none (by design) | 15 |
+| Web searches | none (by design) | 10 |
+
+Six links were in both notes, half of Lantern's 12: AWS and NVIDIA on sending each coding
+task to the right model, release 1.110 of LiteLLM (a test version of a program that sits
+between an app and many model providers), version 1.0.3 of Rapid-MLX, an Apple paper on AI
+models that grade writing style, an OpenRouter article on how much text tool definitions add
+to every request, and a Pydantic article on using recorded steps of coding agents to improve
+them.
+
+What each note covered:
+
+| Topic | Lantern | Q Lens |
+|---|---|---|
+| New releases of LiteLLM, and AWS's gateway built on it | story | part of a story (one release only) |
+| Paying for a whole coding task, not for one model call | story | quick link |
+| AI models that grade other models' answers, and their bias | story | quick link |
+| Hidden costs of agents: tool definitions and endless retries | story | story (tool definitions only) |
+| Seeing inside coding agents, and designing the program around them | story | quick link |
+| Running models on your own Mac | quick link | two quick links |
+| New models built to work alongside other models (Gemini 4 Hydrogen, Claude Fable 5.2) | not covered | story |
+| Models that return a decision with a probability instead of text (Google, OpenRouter, Perplexity) | not covered | story |
+| Inkling 2 Small from Thinking Machines: free weights, and training in 4-bit numbers | not covered | story |
+| New models and services from Chinese labs (DeepSeek, Qwen4-Max and others) | not covered | story |
+| Agents that tried to break into a website during a safety test (report by Epoch AI) | not covered | story |
+| Accuracy of hosted model providers, recommender systems | not covered | quick links |
+
+What this week shows:
+
+1. Lantern again left out the week's big model releases: Gemini 4 Hydrogen, Claude Fable 5.2
+   and the free weights of Inkling 2 Small.
+2. Both programs found the same dead source: the Thinking Machines feed answered "page not
+   found". Both listed it in the note and carried on.
+3. Q Lens worked around its two broken sources with a search of each site. Its note still
+   has the Inkling 2 Small posts from the Thinking Machines site, and for the Qwen blog it
+   used a news digest and said so in a warning. It also listed suggested fixes for the
+   broken sources, for a person to approve.
+4. With the same example taste file and no memory, the two notes shared more than in earlier
+   weeks: 6 links. Lantern still leaned towards how to build and run agents, Q Lens towards
+   announcements.
+
 ## Note of Monday 9 November 2026 (news from 2 to 9 November)
 
 | | Lantern | Q Lens |

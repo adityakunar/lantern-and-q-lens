@@ -31,7 +31,7 @@ Managed Agents has its own vocabulary. Each word below is also one folder of fil
 |---|---|
 | `agents/q-lens.md` | The agent: model, tools and its standing instructions |
 | `skills/curate-weekly/` | The skill it follows: steps, interests, sources, note layout, memory rules and the collector script |
-| `deployments/weekly-ai-news-digest.yml` | The schedule (Mondays 08:00), the kickoff message and a $5 cost cap per run |
+| `deployments/weekly-ai-news-digest.yml` | The deployment "Q Lens weekly AI note": the schedule (Mondays 08:00), the first message of each run and a $5 cost cap per run |
 | `environments/q-lens-env.yml` | The sandbox, with a network that reaches only the listed hosts |
 | `memory_stores/q-lens-memory.yaml` | What the agent remembers between weeks |
 | `network/` | Builds the host allowlist from the skill's sources |

@@ -8,7 +8,7 @@
 #
 # Each note runs in its own environment. The section a host sits under decides which
 # (add a section per note if you add more notes):
-#   [news]     -> q-lens-env   (curate-weekly, Weekly AI News Digest)
+#   [news]     -> q-lens-env   (curate-weekly, Q Lens weekly AI note)
 #   [all]      -> every environment
 # Text after the section name (": ...") is just a label.
 

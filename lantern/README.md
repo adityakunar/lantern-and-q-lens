@@ -1,6 +1,6 @@
 # Lantern
 
-> This is Lantern v1, frozen as published. It is one half of a comparison: the same weekly
+> This is version 1 of Lantern, kept unchanged so the published results can be repeated. It is one half of a comparison: the same weekly
 > note is also written by a Claude Managed Agent, [Q Lens](../q-lens/). The results and the
 > known flaws are in the [top-level README](../README.md).
 
@@ -42,12 +42,21 @@ uv run lantern why https://example.com/some-article
 cd lantern
 uv sync
 cp lantern.example.yaml ~/.config/lantern.yaml   # set your vault, library and model (found by default)
-uv run lantern check ai          # validate config and try every source once
-uv run lantern run ai-weekly --dry-run
+uv run lantern check ai          # free: validate config and try every source once
+uv run lantern run ai-weekly --dry-run --no-model   # free: a keyword-ranked preview, nothing saved
+uv run lantern run ai-weekly --dry-run   # calls the model: a full preview, nothing saved
 uv run lantern run ai-weekly     # writes <vault>/Lantern/AI news/Lantern/<year>-W<week>.md
 uv run lantern check security
 uv run lantern run security-weekly   # writes <vault>/Lantern/Security/Lantern/<year>-W<week>.md
 ```
+
+**What a dry run costs.** `--dry-run` does everything a real run does, including asking the
+model to judge every item and write the note, and then prints the note instead of saving it.
+It also leaves the library untouched. So it takes as long and costs as much as a real run: in
+the live test on 15 November 2026 it took about 225 seconds and about $0.40 with Claude
+Sonnet 5.5. `--no-model` skips the model and writes a plainer note ranked by keywords; with
+`--dry-run` as well, nothing is saved and nothing is paid (about 30 seconds, all of it spent
+reading the sources). `uv run pytest` and `lantern check` never call the model.
 
 The model is any OpenAI-compatible server, for example rapid-mlx on `127.0.0.1:9000`. A cloud server such as
 NVIDIA NIM works too. Lantern reads the key from macOS Keychain itself, so it never sits in a settings file,
@@ -64,7 +73,7 @@ models reject a low temperature. `lantern.example.yaml` has ready blocks for bot
 
 | Command | What it does |
 | --- | --- |
-| `lantern run <recipe> [--until YYYY-MM-DD] [--dry-run] [--no-model]` | Write the note. |
+| `lantern run <recipe> [--until YYYY-MM-DD] [--dry-run] [--no-model]` | Write the note. `--dry-run` prints it instead of saving it (the model is still called and paid); `--no-model` writes a keyword-ranked note without the model. |
 | `lantern why <url>` | Show every decision about a link. |
 | `lantern check [<interest>]` | Validate config; with an interest, fetch each source once. |
 | `lantern benchmark` | Rewrite `Lantern/Benchmark.md`: cost, time and tokens of every note, Lantern's and the news agent's. |
