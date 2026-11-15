@@ -18,7 +18,7 @@ claude-lock.json
 
 # Notes go to the Obsidian vault, never here
 *.note.md
-outputs/
+/q-lens/outputs/
 
 # Keys live in the macOS Keychain. Never commit env or key files.
 .env
