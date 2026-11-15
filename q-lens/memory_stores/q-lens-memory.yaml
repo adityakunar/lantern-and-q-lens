@@ -1,0 +1,12 @@
+# Memory store for the Q Lens. ant apply creates it; the deployment attaches it to every run.
+# The agent sees it as the folder /mnt/memory/q-lens-memory/, with one folder per note:
+# ai/ (skills/curate-weekly/memory.md).
+# Never put keys, tokens or personal data in this store: every later run reads it back.
+name: q-lens-memory
+description: |
+  The curator's notes between weekly runs, one folder per note. Each note reads only its own
+  folder at the start of a run and updates it after the note is saved, as its skill's memory
+  file describes.
+  ai/: posted.md (links already used; skip repeats), threads.md (storylines across weeks),
+  sources.md (source notes, suggestions only), source-health.json (kept by collect.py).
+  Keep about 8 weeks of history. Never edit source-health.json by hand. No secrets.

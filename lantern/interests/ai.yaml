@@ -1,0 +1,488 @@
+# Your AI sources ("artists") and themes, carried over from profiles/ai.yaml at the
+# reference/pre-reset tag, plus the sources added on 2026-10-25.
+# Check them any time with: uv run lantern check ai
+#
+# A `feed` needs a `url`. A `page` reads post links from a server-rendered listing with
+# `link_pattern` (and optionally `date_pattern`); it is only used when robots.txt allows it.
+# `tags` and `notes` are for you; Lantern stores them but does not filter on them.
+id: ai
+description: >
+  New ideas, releases and practical lessons in AI: reasoning, agents, inference efficiency,
+  evals, interpretability, recommender systems, personalisation and LLM applications in
+  production, including the local-model tooling the reader runs (MLX, rapid-mlx, LiteLLM).
+  Prefer primary sources and substantive technical posts; skip marketing, funding news,
+  event announcements and listicles. Routine patch releases only matter when they change
+  something the reader would notice.
+
+# Theme ids become #tags in the note. Aliases are the phrases the keyword ranking looks for
+# (a trailing "s" is matched automatically). These are the original lists, unchanged.
+themes:
+  reasoning: [chain of thought, reasoning traces, reasoning trace, test time compute]
+  agents: [agent, agentic, tool calling, agent memory, multi agent, mcp, model context protocol, computer use]
+  inference-efficiency: [gpu self hosting, gpu waiting, inference optimization, inference latency, quantization, batching, llm serving]
+  alignment: [ai safety, safety cases, safety case, model safety, containment, adversarial distillation]
+  multimodal: [vision language, image understanding, video understanding, video world models, video generation]
+  evals: [eval, evaluation, evaluations, benchmark, benchmarks, llm judge, llm judgments, tool calling accuracy, confidence calibration]
+  interpretability: [mechanistic interpretability, activation analysis, circuit analysis, sparse autoencoder, steering]
+  model-releases: [model release, new model, new models, embedding model, embedding models, foundation model, foundation models]
+  from-scratch-implementations: [from scratch, build your own, implement from scratch]
+  llm-routing: [model routing, model router, model routers, model selection, model escalation, escalation routing, llm router, confidence thresholds]
+  ml-ops: [mlops, self hosting, gpu hosting, production deployment, model deployment, model monitoring, llm monitoring, agent observability, llm observability, production observability, production inference]
+  llm-applications: [llm apps, llm application, ai applications, rag, retrieval augmented generation]
+  # The old profile needed extra excerpt strength here, because bare "experimentation" in
+  # business prose isn't an experiment. The model judge now weeds those out.
+  experimentation: [experiment, experiments, a b testing, contextual bandits]
+  recommender-systems: [recommender system, recommendation system, recommendation systems, recsys, reranking, recommendations]
+  audio-ml: [audio models, audio model, speech recognition, speech synthesis, music generation]
+  personalization: [personalized, personalised, personalisation]
+  post-training: [rlhf, reinforcement learning, fine tuning, grpo, dpo, distillation, synthetic data]
+  coding-agents: [coding agent, coding agents, code generation, swe bench, claude code, codex]
+  on-device: [on device, local model, local models, small language model, apple silicon, gguf]
+  generative-recommendations: [generative recommendation, generative recommender, conversational recommendation]
+
+sources:
+  # ── AI research labs ──────────────────────────────────────────────────────
+  openai:
+    type: feed
+    url: https://openai.com/news/rss.xml
+    tags: [openai, gpt, reasoning, alignment]
+    notes: >-
+      Everything OpenAI publishes, research included (about 200 of its items are in the
+      Research category). openai.com/research itself returns 403 to plain fetches.
+  openai_alignment:
+    type: feed
+    url: https://alignment.openai.com/rss.xml
+    tags: [openai, alignment, interpretability, safety, evals]
+    notes: >-
+      OpenAI's Alignment Research Blog: informal research notes from the alignment team
+      (monitoring, interpretability, reward hacking), the closest match to Anthropic's research
+      pages. Verified 2026-11-02.
+  deepmind:
+    type: feed
+    url: https://deepmind.google/blog/rss.xml
+    tags: [deepmind, google, research]
+  nvidia_ai:
+    type: feed
+    url: https://blogs.nvidia.com/blog/category/deep-learning/feed/
+    tags: [nvidia, inference, hardware, triton]
+  nvidia_developer:
+    type: feed
+    url: https://developer.nvidia.com/blog/category/generative-ai/feed/
+    tags: [nvidia, inference, agents, fine-tuning, nemotron]
+    notes: >-
+      NVIDIA Technical Blog, Agentic AI / Generative AI category only: inference, fine-tuning
+      and agent engineering posts, without the graphics and data-center ones in the sitewide
+      /blog/feed/. Atom. Verified 2026-10-29.
+  google_ai_blog:
+    type: feed
+    url: https://blog.google/innovation-and-ai/technology/ai/rss/
+    tags: [google, gemini, gemma, model-releases]
+    notes: AI-scoped section feed, not the sitewide Google blog firehose. Verified 2026-09-17.
+  google_research:
+    type: feed
+    url: https://research.google/blog/rss/
+    tags: [google, google-research, research]
+    notes: >-
+      Google Research blog, separate from DeepMind's. Its descriptions are only a category
+      label, so Lantern reads each new post's opening text instead. Verified 2026-11-02.
+  anthropic_news:
+    type: page
+    index_url: https://www.anthropic.com/news
+    # The negative lookahead skips the category pages linked from the same listing.
+    link_pattern: 'href="(/news/(?!(?:announcements|features|partnerships|policy|product|safeguards|security)")[a-z0-9-]+)"'
+    base_url: https://www.anthropic.com
+    date_pattern: '([A-Z][a-z]{2,8} \d{1,2}, \d{4})'
+    limit: 20
+    tags: [anthropic, research, product]
+    notes: No RSS feed; robots.txt has no crawler restriction and the page is server-rendered. Dates verified 2026-10-25.
+  anthropic_research:
+    type: page
+    index_url: https://www.anthropic.com/research
+    # Team pages (/research/team/...) are skipped; a few featured cards carry no date.
+    link_pattern: 'href="(/research/(?!team/)[a-z0-9-]+)"'
+    base_url: https://www.anthropic.com
+    date_pattern: '([A-Z][a-z]{2,8} \d{1,2}, \d{4})'
+    limit: 20
+    tags: [anthropic, research, alignment, interpretability, societal-impacts]
+    notes: >-
+      Research posts (alignment, interpretability, economics, science), which /news doesn't
+      list. Same robots.txt clearance as anthropic_news. Verified 2026-11-02.
+  anthropic_engineering:
+    type: page
+    index_url: https://www.anthropic.com/engineering
+    # The listing links to /research/... URLs; the library keeps one copy if both list a post.
+    link_pattern: 'href="(/(?:engineering|research)/[a-z0-9-]+)"'
+    base_url: https://www.anthropic.com
+    date_pattern: '([A-Z][a-z]{2,8} \d{1,2}, \d{4})'
+    limit: 20
+    tags: [anthropic, engineering, agents, coding-agents, claude-code, evals]
+    notes: Engineering posts (agents, Claude Code, evals, tools); a few a month. Verified 2026-11-02.
+  mistral:
+    type: feed
+    url: https://mistral.ai/news/rss
+    tags: [mistral, model-releases, open-weights]
+    notes: Added 2026-10-25. The old profile said "no public RSS"; /news/rss now exists.
+  sakana_ai:
+    type: feed
+    url: https://sakana.ai/feed.xml
+    tags: [sakana-ai, evolutionary-algorithms, foundation-models, japan]
+    notes: Atom feed at /feed.xml. Verified 2026-09-21.
+  apple_ml_research:
+    type: feed
+    url: https://machinelearning.apple.com/rss.xml
+    tags: [apple, on-device, mlx, research]
+    notes: On-device models and MLX research, close to the reader's stack. Verified 2026-10-26.
+  ai2:
+    type: feed
+    url: https://allenai.org/rss.xml
+    tags: [ai2, open-models, post-training, research]
+    notes: Allen Institute for AI; fully open models and post-training recipes. Verified 2026-10-26.
+  microsoft_research:
+    type: feed
+    url: https://www.microsoft.com/en-us/research/feed/
+    tags: [microsoft, research, multimodal]
+    notes: Research breadth across labs. Verified 2026-10-26.
+  # Considered and rejected (unchanged from the old profile):
+  #   meta_ai (ai.meta.com): client-rendered listing and a robots.txt "no automated
+  #     collection" notice with no wildcard allow. Meta's engineering blog below covers it.
+  meta_ml_applications:
+    type: feed
+    url: https://engineering.fb.com/category/ml-applications/feed/
+    tags: [meta, recsys, generative-recommendations, ml-systems]
+    notes: >-
+      Meta Engineering, ML Applications category only (not the sitewide feed): ads and
+      recommendation models, training infrastructure. Verified 2026-10-29.
+  meta_ai_research:
+    type: feed
+    url: https://engineering.fb.com/category/ai-research/feed/
+    tags: [meta, agents, research, coding-agents]
+    notes: >-
+      Meta Engineering, AI Research category only. Some posts are in both Meta categories;
+      the library keeps one copy per URL. Verified 2026-10-29.
+  cognition:
+    type: page
+    index_url: https://cognition.com/blog
+    link_pattern: 'href="(/blog/[a-z0-9.-]+)"'
+    base_url: https://cognition.com
+    date_pattern: 'dateTime="([0-9T:+-]+)"'
+    limit: 15
+    tags: [cognition, devin, windsurf, coding-agents, agents, evals]
+    notes: >-
+      Cognition (Devin, Windsurf) blog, newest first, about 2 posts a week: product launches,
+      SWE models, coding-agent research and benchmarks, plus company news the judge weeds
+      out. No feed; cognition.ai redirects here, robots.txt allows all and the listing is
+      server-rendered with dates. Verified 2026-11-03.
+  #   perplexity (perplexity.ai): blog pages return 403 to plain HTTP fetches.
+  #   xai_news (x.ai/news): returns 403 to plain HTTP fetches, and there is no feed. The API
+  #     release notes below cover xAI's model releases instead.
+  xai_models:
+    type: page
+    index_url: https://docs.x.ai/developers/release-notes.md
+    # Each model release in the notes links to its model page, e.g. /developers/grok-4-7.
+    link_pattern: '\]\((/developers/grok-[a-z0-9-]+)\)'
+    base_url: https://docs.x.ai
+    limit: 3
+    tags: [xai, grok, model-releases]
+    notes: >-
+      xAI API release notes (the docs serve the page as Markdown), newest first. Links only,
+      no dates: each model page counts as new the week Lantern first sees it, and its opening
+      text is read from the model page. Verified 2026-11-02.
+
+  # ── Benchmarks and model comparisons ──────────────────────────────────────
+  epoch_ai:
+    type: feed
+    url: https://epoch.ai/atom.xml
+    tags: [epoch-ai, evals, compute, benchmarks, trends]
+    notes: >-
+      Epoch AI's site feed (data insights, Gradient Updates, reports), about 3 a week. The
+      epochai.substack.com feed is a subset. Verified 2026-11-02.
+  artificial_analysis:
+    type: page
+    index_url: https://artificialanalysis.ai/articles
+    link_pattern: 'href="(/articles/[a-z0-9-]+)"'
+    base_url: https://artificialanalysis.ai
+    date_pattern: '([A-Z][a-z]{2,8} \d{1,2}, \d{4})'
+    limit: 20
+    tags: [artificial-analysis, evals, benchmarks, llm-routing, model-releases]
+    notes: >-
+      Independent model comparisons (intelligence, speed, price), usually within a day of a
+      release. No feed; robots.txt allows all and the listing is server-rendered with dates.
+      Verified 2026-11-02.
+  arena:
+    type: page
+    index_url: https://arena.ai/blog
+    link_pattern: 'href="(/blog/[a-z0-9-]+)"'
+    base_url: https://arena.ai
+    limit: 10
+    tags: [arena, lmarena, evals, llm-judge, llm-routing]
+    notes: >-
+      LMArena's blog (now arena.ai): leaderboards, routing, LLM judges. Its /blog/rss serves
+      HTML, so this reads the listing, which has no dates: a post counts as new the week
+      Lantern first sees it. Verified 2026-11-02.
+
+  # ── Interpretability ──────────────────────────────────────────────────────
+  transformer_circuits:
+    type: feed
+    url: https://transformer-circuits.pub/feed.xml
+    tags: [anthropic, interpretability, mechanistic-interpretability]
+    notes: Anthropic's interpretability team's own publication venue (Atom feed). Verified 2026-09-17.
+  metr:
+    type: feed
+    url: https://metr.org/feed.xml
+    tags: [metr, evals, capabilities, safety]
+    notes: Independent evaluations of frontier model capabilities. Verified 2026-10-26.
+
+  # ── Researchers and writers ───────────────────────────────────────────────
+  karpathy:
+    type: feed
+    url: https://karpathy.github.io/feed.xml
+    tags: [karpathy, education, deep-learning, interpretability]
+    notes: Posts infrequently but with high signal.
+  eugene_yan:
+    type: feed
+    url: https://eugeneyan.com/rss/
+    tags: [eugene-yan, applied-ml, recsys, llm-systems]
+    notes: Strong on practical ML systems and literature reviews.
+  chip_huyen:
+    type: feed
+    url: https://huyenchip.com/feed.xml
+    tags: [chip-huyen, ml-systems, production, agents]
+    notes: Author of 'Designing ML Systems'. Good on productionization.
+  sebastian_raschka:
+    type: feed
+    url: https://magazine.sebastianraschka.com/feed
+    tags: [sebastian-raschka, education, paper-reviews, llm]
+    notes: Weekly paper reviews and tutorials.
+  simon_willison:
+    type: feed
+    url: https://simonwillison.net/atom/entries/
+    tags: [simon-willison, llm-tools, local-models, prompt-injection]
+    notes: Added 2026-10-25. Blog posts only (not the link log). Strong on LLM tools and local models.
+  alex_zhang:
+    type: feed
+    url: https://alexzhang13.github.io/feed.xml
+    tags: [alex-zhang, agents, harnesses, tool-calling, research]
+    notes: >-
+      MIT CSAIL researcher's personal blog (co-author of "Weight-Space Programming").
+      Idea-driven posts on harnesses, tool calling and model behaviour, about monthly.
+      Added 2026-11-04.
+  lilian_weng:
+    type: feed
+    url: https://lilianweng.github.io/index.xml
+    tags: [lilian-weng, surveys, agents, reasoning, scaling-laws]
+    notes: Long, careful survey posts a few times a year. Added 2026-11-04.
+  sander_dieleman:
+    type: feed
+    url: https://sander.ai/feed.xml
+    tags: [sander-dieleman, diffusion, generative-models, research]
+    notes: Deep dives on diffusion and generative modelling. Added 2026-11-04.
+  jack_morris:
+    type: feed
+    url: https://blog.jxmo.io/feed
+    tags: [jack-morris, embeddings, research-practice]
+    notes: Embeddings, retrieval and research practice essays. Added 2026-11-04.
+  thinking_machines:
+    type: feed
+    url: https://thinkingmachines.ai/blog/index.xml
+    tags: [thinking-machines, research, open-weights, human-ai-collaboration]
+    notes: Thinking Machines Lab "Connectionism" blog, research-essay style. Added 2026-11-04.
+  jacob_li:
+    type: feed
+    url: https://jacobxli.com/feed.xml
+    tags: [jacob-li, essays, research]
+    notes: Personal research essays, a few a year. Added 2026-11-04.
+  semianalysis:
+    type: feed
+    url: https://newsletter.semianalysis.com/feed
+    tags: [semianalysis, inference-efficiency, compute, hardware, datacenters, evals]
+    notes: >-
+      SemiAnalysis newsletter, about 2-3 posts a week: AI hardware, inference economics,
+      datacenters, chip supply and benchmarks (e.g. GDPx, ClusterMAX). Paid posts still carry
+      the free opening in the feed. The old semianalysis.com/feed stopped in Sep 2025.
+      Verified 2026-11-04.
+  interconnects:
+    type: feed
+    url: https://www.interconnects.ai/feed
+    tags: [nathan-lambert, post-training, rl, open-models]
+    notes: Post-training, RL and open models. Verified 2026-10-26.
+  hamel_husain:
+    type: feed
+    url: https://hamel.dev/index.xml
+    tags: [hamel-husain, evals, llm-applications]
+    notes: Evals in practice. Verified 2026-10-26.
+  latent_space:
+    type: feed
+    url: https://www.latent.space/feed
+    tags: [latent-space, agents, ai-engineering, podcast-transcripts]
+    notes: AI engineering; podcast episodes are published with full transcripts. Verified 2026-10-26.
+
+  # ── Newsletters ───────────────────────────────────────────────────────────
+  import_ai:
+    type: feed
+    url: https://importai.substack.com/feed
+    tags: [jack-clark, import-ai, policy, research-roundup]
+    notes: Jack Clark (Anthropic co-founder). Research and policy perspective.
+  recode_china_ai:
+    type: feed
+    url: https://recodechinaai.substack.com/feed
+    tags: [china, deepseek, qwen, moonshot, open-models]
+    notes: >-
+      Weekly English coverage of Chinese labs (DeepSeek, Alibaba Qwen, Moonshot, Zhipu). Those
+      labs publish no working feeds: deepseek and moonshot news pages and qwen.ai are not feeds,
+      and qwenlm.github.io stopped in Sep 2025 (checked 2026-10-26). Verified 2026-10-26.
+  the_batch:
+    type: page
+    index_url: https://www.deeplearning.ai/the-batch/
+    link_pattern: 'href="(/the-batch/issue-(\d+))/?"'
+    base_url: https://www.deeplearning.ai
+    order: numeric
+    limit: 3
+    date_pattern: '([A-Z][a-z]{2,8} \d{1,2}, \d{4})'
+    tags: [the-batch, deeplearning-ai, andrew-ng, news-roundup]
+    notes: >-
+      No RSS feed. robots.txt disallows named AI crawlers but has a wildcard allow covering
+      Lantern's own UA. Index page is server-rendered; issue-NNN hrefs are in the raw HTML.
+  the_batch_data_points:
+    type: page
+    index_url: https://www.deeplearning.ai/the-batch/tag/data-points
+    link_pattern: 'href="(/the-batch/(?!tag/|about|search|issue-)[a-z0-9-]+)/?"'
+    base_url: https://www.deeplearning.ai
+    date_pattern: '([A-Z][a-z]{2,8} \d{1,2}, \d{4})'
+    tags: [the-batch, deeplearning-ai, andrew-ng, news-roundup, data-points]
+    notes: The Batch's short-news column, newest first. Same robots.txt clearance as the_batch.
+
+  tldr_ai:
+    type: feed
+    url: https://tldr.tech/api/rss/ai
+    tags: [tldr, news-roundup, daily]
+    notes: >-
+      TLDR AI, the newsletter's own feed: one item per daily issue (tldr.tech/ai/YYYY-MM-DD),
+      already curated. Items have no description, so the judge sees only the headline teaser.
+      Verified 2026-10-29.
+
+  # ── News and roundup sites ────────────────────────────────────────────────
+  marktechpost:
+    type: feed
+    url: https://www.marktechpost.com/feed/
+    tags: [marktechpost, news, research-roundup]
+    notes: High-volume AI news/paper roundup site.
+  mit_tech_review_ai:
+    type: feed
+    url: https://www.technologyreview.com/topic/artificial-intelligence/feed/
+    tags: [mit-technology-review, journalism, policy, business]
+    notes: AI-topic feed; independent journalism angle the lab blogs don't cover. Verified 2026-09-17.
+
+  # ── Open models, libraries and frameworks ─────────────────────────────────
+  hugging_face:
+    type: feed
+    url: https://huggingface.co/blog/feed.xml
+    tags: [hugging-face, open-models, transformers, model-releases]
+    notes: Added 2026-10-25. Verified 2026-10-25.
+  langchain:
+    type: feed
+    url: https://blog.langchain.dev/rss.xml
+    tags: [langchain, agents, llm-apps, rag]
+    notes: Official LangChain blog. Verified 2026-09-18.
+  openrouter:
+    type: feed
+    url: https://openrouter.ai/blog/feed.xml
+    tags: [openrouter, llm-api, model-routing, model-releases]
+    notes: Model routing/aggregation updates. Verified 2026-09-18.
+  litellm:
+    type: feed
+    url: https://docs.litellm.ai/release_notes/rss.xml
+    tags: [litellm, llm-routing, llm-api, proxy]
+    notes: Added 2026-10-25. Release notes as a feed; several a week, so the source cap matters. Verified 2026-10-25.
+  arize:
+    type: feed
+    url: https://arize.com/feed/
+    tags: [arize, observability, evals, llm-monitoring]
+    notes: Observability/platform blog. Verified 2026-09-18.
+  pydantic:
+    type: feed
+    url: https://pydantic.dev/feed.xml
+    tags: [pydantic, pydantic-ai, agent-frameworks, validation]
+    notes: Pydantic AI, Logfire and agent frameworks. Verified 2026-09-18.
+  snorkel_ai:
+    type: feed
+    url: https://snorkel.ai/feed/
+    max_mb: 4  # full-content feed, about 2.2 MB
+    tags: [snorkel-ai, data-centric-ai, weak-supervision, llm-eval]
+    notes: Data-centric AI, weak supervision, LLM evaluation. Verified 2026-09-21.
+
+  # ── Inference and local models (what runs on your Mac) ────────────────────
+  vllm:
+    type: feed
+    url: https://vllm.ai/blog/rss.xml
+    tags: [vllm, inference, llm-serving, gpu, distributed-systems]
+    notes: LLM inference, serving, GPU optimization. Verified 2026-09-21.
+  rapid_mlx:
+    type: feed
+    url: https://github.com/raullenchai/Rapid-MLX/releases.atom
+    tags: [rapid-mlx, mlx, local-models, apple-silicon, inference]
+    notes: Added 2026-10-25. GitHub releases of the server your model runs on; frequent patch releases.
+  mlx:
+    type: feed
+    url: https://github.com/ml-explore/mlx/releases.atom
+    tags: [mlx, apple-silicon, local-models, inference]
+    notes: Added 2026-10-25. Apple's MLX framework releases, which rapid-mlx builds on.
+
+  # ── Cloud AI/ML platforms ─────────────────────────────────────────────────
+  aws_ml_blog:
+    type: feed
+    url: https://aws.amazon.com/blogs/machine-learning/feed/
+    tags: [aws, ml-ops, llm-applications, generative-ai, bedrock, sagemaker]
+    notes: Official AWS Machine Learning Blog. Verified 2026-09-21.
+  aws_architecture:
+    type: feed
+    url: https://aws.amazon.com/blogs/architecture/feed/
+    tags: [aws, architecture, ml-systems, distributed-systems]
+    notes: ML-relevant architecture patterns. Verified 2026-09-21.
+
+  cloudflare_ai:
+    type: feed
+    url: https://blog.cloudflare.com/tag/ai/rss/
+    tags: [cloudflare, inference, agents, llm-applications, workers-ai]
+    notes: >-
+      Cloudflare blog, AI tag only; the sitewide feed is mostly networking and security.
+      Narrower tags exist (workers-ai, ai-gateway, agents) if this is too broad. Verified 2026-10-29.
+
+  # ── Payments ──────────────────────────────────────────────────────────────
+  stripe_dev:
+    type: feed
+    url: https://stripe.dev/blog/feed
+    tags: [stripe, payments, agents, fraud, fintech]
+    notes: >-
+      Stripe's developer blog, for the payment agent work: agent payments, Radar fraud ML,
+      LLM fine-tuning for risk. Mostly API how-tos, which the keyword cut and judge weed out.
+      Not stripe.com/blog, which is business news. Verified 2026-11-02.
+
+  # ── Spotify and hardware (feedless pages) ─────────────────────────────────
+  spotify_engineering:
+    type: page
+    index_url: https://engineering.atspotify.com/
+    link_pattern: 'href="(/20[0-9]{2}/[0-9]{1,2}/[a-z0-9-]+)/?"'
+    base_url: https://engineering.atspotify.com
+    date_pattern: '([A-Z][a-z]{2,8} \d{1,2}, \d{4})'
+    tags: [spotify, engineering, data-science, ml-ops, llm-applications, experimentation]
+    notes: robots.txt wildcard allow; server-rendered. Verified 2026-09-21.
+  spotify_research:
+    type: page
+    index_url: https://research.atspotify.com/publications
+    link_pattern: 'href="(/publications/[a-z0-9-]+)/?"'
+    base_url: https://research.atspotify.com
+    date_pattern: '([A-Z][a-z]{2,8} \d{1,2}, \d{4})'
+    tags: [spotify, research, publications, recommender-systems, audio-ml, personalization, generative-recommendations]
+    notes: robots.txt wildcard allow; server-rendered. Verified 2026-09-21.
+  netflix_tech:
+    type: feed
+    url: https://netflixtechblog.com/feed
+    tags: [netflix, recsys, personalization, experimentation]
+    notes: Recommender systems and experimentation beyond Spotify. Verified 2026-10-26.
+  imec_aistack:
+    type: feed
+    url: https://aistack.imec-int.com/rss.xml
+    tags: [imec, aistack, ml-systems, hardware, agents]
+    notes: >-
+      The site was rebuilt and now has a dated RSS feed; the old /blog/ directory listing
+      returns 403. Verified 2026-10-26.

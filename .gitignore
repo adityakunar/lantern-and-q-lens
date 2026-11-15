@@ -1,0 +1,27 @@
+# Python and editor clutter
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+dist/
+.DS_Store
+
+# Local state
+.claude/
+lantern.yaml
+*.sqlite
+*.sqlite.lock
+
+# `ant apply` writes the IDs of YOUR agent, deployment, environment and memory store here.
+claude-lock.json
+
+# Notes go to the Obsidian vault, never here
+*.note.md
+outputs/
+
+# Keys live in the macOS Keychain. Never commit env or key files.
+.env
+.env.*
+*.key
+*.pem

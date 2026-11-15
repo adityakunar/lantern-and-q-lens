@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/deployment.json
+name: Weekly AI News Digest
+agent: ../agents/q-lens.md
+environment_id: ../environments/q-lens-env.yml
+resources:
+  - ../memory_stores/q-lens-memory.yaml   # mounted at /mnt/memory/q-lens-memory/ (this note uses ai/), read-write
+initial_events:
+  - type: user.message
+    content:
+      - type: text
+        text: Write this week's AI note with the curate-weekly skill, covering the 7 days up to now. Save it to /mnt/session/outputs/ and finish with the run report.
+schedule:
+  type: cron
+  expression: 0 8 * * 1
+  timezone: Europe/Amsterdam
+budget:
+  type: limit
+  max_list_cost:
+    currency: USD
+    amount: "500"

@@ -1,0 +1,47 @@
+# Your taste, shared by every interest in Lantern and by the Q Lens agent.
+# This is an EXAMPLE profile: replace the text under `building` with your own projects.
+# Edit this one file; Q Lens copies it with ./sync-shared.sh before `ant apply`.
+#
+# building: what you are working on. An item that would change how one of these is built
+#   earns the own_stack vote. Keep it short; it goes into every judging prompt.
+# votes: named traits that push an item up or down. The model only says which ones apply;
+#   Lantern adds the points to its 0-10 score and keeps the result between 0 and 10.
+#   Change a weight or add a trait here; the next run uses it.
+
+building: |
+  - A support assistant for a small online shop: an LLM agent with tools for orders and
+    refunds, served through an MCP server, with traces and an LLM judge for quality.
+  - A personal knowledge tool: weekly notes written into Obsidian by a local model on a Mac.
+  Topics that touch these: agent frameworks, MCP, skills; agent observability, evals and LLM
+  judges; local inference on a Mac (MLX, Ollama); batch and structured-output APIs; LLM
+  routing and model selection.
+  Repos watched: FastMCP, LiteLLM, deepeval, Arize Phoenix.
+
+votes:
+  own_stack:
+    points: 2
+    when: Would change how one of the projects under "What the reader is building" is built, or is news about a watched repo.
+  primary_source:
+    points: 1
+    when: Written by the people who did the work (the lab, maintainer or author).
+  reusable:
+    points: 1
+    when: Has code, numbers, a recipe or a benchmark the reader could reuse.
+  runs_on_mac:
+    points: 1
+    when: Runs locally on Apple Silicon (MLX, Ollama, rapid-mlx, llama.cpp).
+  continues_thread:
+    points: 1
+    when: Moves on a story the reader has already seen in an earlier week (new release, result or reply).
+  marketing:
+    points: -3
+    when: Mainly sells a product, or a customer story without technical specifics.
+  money_or_people:
+    points: -2
+    when: Funding, valuation, hiring or executive moves, with no technical news.
+  second_hand:
+    points: -1
+    when: Rewrites someone else's announcement when the primary source exists.
+  title_only:
+    points: -1
+    when: There is no excerpt or body text to judge from, only a title.

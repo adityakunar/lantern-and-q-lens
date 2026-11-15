@@ -1,0 +1,30 @@
+name: checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lantern:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: lantern
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      - run: uv run ruff check
+      - run: uv run pytest -q
+  q-lens:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: q-lens
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 network/build-env.py --check
+      - run: ./sync-shared.sh --check

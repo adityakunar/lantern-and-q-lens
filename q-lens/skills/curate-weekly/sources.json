@@ -1,0 +1,681 @@
+{
+  "feeds": [
+    {
+      "name": "openai",
+      "url": "https://openai.com/news/rss.xml",
+      "tags": [
+        "openai",
+        "gpt",
+        "reasoning",
+        "alignment"
+      ]
+    },
+    {
+      "name": "deepmind",
+      "url": "https://deepmind.google/blog/rss.xml",
+      "tags": [
+        "deepmind",
+        "google",
+        "research"
+      ]
+    },
+    {
+      "name": "nvidia_ai",
+      "url": "https://blogs.nvidia.com/blog/category/deep-learning/feed/",
+      "tags": [
+        "nvidia",
+        "inference",
+        "hardware",
+        "triton"
+      ]
+    },
+    {
+      "name": "nvidia_developer",
+      "url": "https://developer.nvidia.com/blog/category/generative-ai/feed/",
+      "tags": [
+        "nvidia",
+        "inference",
+        "agents",
+        "fine-tuning",
+        "nemotron"
+      ]
+    },
+    {
+      "name": "google_ai_blog",
+      "url": "https://blog.google/innovation-and-ai/technology/ai/rss/",
+      "tags": [
+        "google",
+        "gemini",
+        "gemma",
+        "model-releases"
+      ]
+    },
+    {
+      "name": "mistral",
+      "url": "https://mistral.ai/news/rss",
+      "tags": [
+        "mistral",
+        "model-releases",
+        "open-weights"
+      ]
+    },
+    {
+      "name": "sakana_ai",
+      "url": "https://sakana.ai/feed.xml",
+      "tags": [
+        "sakana-ai",
+        "evolutionary-algorithms",
+        "foundation-models",
+        "japan"
+      ]
+    },
+    {
+      "name": "apple_ml_research",
+      "url": "https://machinelearning.apple.com/rss.xml",
+      "tags": [
+        "apple",
+        "on-device",
+        "mlx",
+        "research"
+      ]
+    },
+    {
+      "name": "ai2",
+      "url": "https://allenai.org/rss.xml",
+      "tags": [
+        "ai2",
+        "open-models",
+        "post-training",
+        "research"
+      ]
+    },
+    {
+      "name": "microsoft_research",
+      "url": "https://www.microsoft.com/en-us/research/feed/",
+      "tags": [
+        "microsoft",
+        "research",
+        "multimodal"
+      ]
+    },
+    {
+      "name": "meta_ml_applications",
+      "url": "https://engineering.fb.com/category/ml-applications/feed/",
+      "tags": [
+        "meta",
+        "recsys",
+        "generative-recommendations",
+        "ml-systems"
+      ]
+    },
+    {
+      "name": "meta_ai_research",
+      "url": "https://engineering.fb.com/category/ai-research/feed/",
+      "tags": [
+        "meta",
+        "agents",
+        "research",
+        "coding-agents"
+      ]
+    },
+    {
+      "name": "transformer_circuits",
+      "url": "https://transformer-circuits.pub/feed.xml",
+      "tags": [
+        "anthropic",
+        "interpretability",
+        "mechanistic-interpretability"
+      ]
+    },
+    {
+      "name": "metr",
+      "url": "https://metr.org/feed.xml",
+      "tags": [
+        "metr",
+        "evals",
+        "capabilities",
+        "safety"
+      ]
+    },
+    {
+      "name": "karpathy",
+      "url": "https://karpathy.github.io/feed.xml",
+      "tags": [
+        "karpathy",
+        "education",
+        "deep-learning",
+        "interpretability"
+      ]
+    },
+    {
+      "name": "eugene_yan",
+      "url": "https://eugeneyan.com/rss/",
+      "tags": [
+        "eugene-yan",
+        "applied-ml",
+        "recsys",
+        "llm-systems"
+      ]
+    },
+    {
+      "name": "chip_huyen",
+      "url": "https://huyenchip.com/feed.xml",
+      "tags": [
+        "chip-huyen",
+        "ml-systems",
+        "production",
+        "agents"
+      ]
+    },
+    {
+      "name": "sebastian_raschka",
+      "url": "https://magazine.sebastianraschka.com/feed",
+      "tags": [
+        "sebastian-raschka",
+        "education",
+        "paper-reviews",
+        "llm"
+      ]
+    },
+    {
+      "name": "simon_willison",
+      "url": "https://simonwillison.net/atom/entries/",
+      "tags": [
+        "simon-willison",
+        "llm-tools",
+        "local-models",
+        "prompt-injection"
+      ]
+    },
+    {
+      "name": "alex_zhang",
+      "url": "https://alexzhang13.github.io/feed.xml",
+      "tags": [
+        "alex-zhang",
+        "agents",
+        "harnesses",
+        "tool-calling",
+        "research"
+      ]
+    },
+    {
+      "name": "lilian_weng",
+      "url": "https://lilianweng.github.io/index.xml",
+      "tags": [
+        "lilian-weng",
+        "surveys",
+        "agents",
+        "reasoning",
+        "scaling-laws"
+      ]
+    },
+    {
+      "name": "sander_dieleman",
+      "url": "https://sander.ai/feed.xml",
+      "tags": [
+        "sander-dieleman",
+        "diffusion",
+        "generative-models",
+        "research"
+      ]
+    },
+    {
+      "name": "jack_morris",
+      "url": "https://blog.jxmo.io/feed",
+      "tags": [
+        "jack-morris",
+        "embeddings",
+        "research-practice"
+      ]
+    },
+    {
+      "name": "thinking_machines",
+      "url": "https://thinkingmachines.ai/blog/index.xml",
+      "tags": [
+        "thinking-machines",
+        "research",
+        "open-weights",
+        "human-ai-collaboration"
+      ]
+    },
+    {
+      "name": "jacob_li",
+      "url": "https://jacobxli.com/feed.xml",
+      "tags": [
+        "jacob-li",
+        "essays",
+        "research"
+      ]
+    },
+    {
+      "name": "semianalysis",
+      "url": "https://newsletter.semianalysis.com/feed",
+      "tags": [
+        "semianalysis",
+        "inference-efficiency",
+        "compute",
+        "hardware",
+        "datacenters",
+        "evals"
+      ]
+    },
+    {
+      "name": "interconnects",
+      "url": "https://www.interconnects.ai/feed",
+      "tags": [
+        "nathan-lambert",
+        "post-training",
+        "rl",
+        "open-models"
+      ]
+    },
+    {
+      "name": "hamel_husain",
+      "url": "https://hamel.dev/index.xml",
+      "tags": [
+        "hamel-husain",
+        "evals",
+        "llm-applications"
+      ]
+    },
+    {
+      "name": "latent_space",
+      "url": "https://www.latent.space/feed",
+      "tags": [
+        "latent-space",
+        "agents",
+        "ai-engineering",
+        "podcast-transcripts"
+      ]
+    },
+    {
+      "name": "import_ai",
+      "url": "https://importai.substack.com/feed",
+      "tags": [
+        "jack-clark",
+        "import-ai",
+        "policy",
+        "research-roundup"
+      ]
+    },
+    {
+      "name": "recode_china_ai",
+      "url": "https://www.recodechinaai.com/feed",
+      "tags": [
+        "china",
+        "deepseek",
+        "qwen",
+        "moonshot",
+        "open-models"
+      ]
+    },
+    {
+      "name": "tldr_ai",
+      "url": "https://tldr.tech/api/rss/ai",
+      "tags": [
+        "tldr",
+        "news-roundup",
+        "daily"
+      ]
+    },
+    {
+      "name": "marktechpost",
+      "url": "https://www.marktechpost.com/feed/",
+      "tags": [
+        "marktechpost",
+        "news",
+        "research-roundup"
+      ]
+    },
+    {
+      "name": "mit_tech_review_ai",
+      "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed/",
+      "tags": [
+        "mit-technology-review",
+        "journalism",
+        "policy",
+        "business"
+      ]
+    },
+    {
+      "name": "hugging_face",
+      "url": "https://huggingface.co/blog/feed.xml",
+      "tags": [
+        "hugging-face",
+        "open-models",
+        "transformers",
+        "model-releases"
+      ]
+    },
+    {
+      "name": "langchain",
+      "url": "https://www.langchain.com/blog/rss.xml",
+      "tags": [
+        "langchain",
+        "agents",
+        "llm-apps",
+        "rag"
+      ]
+    },
+    {
+      "name": "openrouter",
+      "url": "https://openrouter.ai/blog/feed.xml",
+      "tags": [
+        "openrouter",
+        "llm-api",
+        "model-routing",
+        "model-releases"
+      ]
+    },
+    {
+      "name": "litellm",
+      "url": "https://docs.litellm.ai/release_notes/rss.xml",
+      "tags": [
+        "litellm",
+        "llm-routing",
+        "llm-api",
+        "proxy"
+      ]
+    },
+    {
+      "name": "arize",
+      "url": "https://arize.com/feed/",
+      "tags": [
+        "arize",
+        "observability",
+        "evals",
+        "llm-monitoring"
+      ]
+    },
+    {
+      "name": "pydantic",
+      "url": "https://pydantic.dev/feed.xml",
+      "tags": [
+        "pydantic",
+        "pydantic-ai",
+        "agent-frameworks",
+        "validation"
+      ]
+    },
+    {
+      "name": "snorkel_ai",
+      "url": "https://snorkel.ai/feed/",
+      "tags": [
+        "snorkel-ai",
+        "data-centric-ai",
+        "weak-supervision",
+        "llm-eval"
+      ]
+    },
+    {
+      "name": "vllm",
+      "url": "https://vllm.ai/blog/rss.xml",
+      "tags": [
+        "vllm",
+        "inference",
+        "llm-serving",
+        "gpu",
+        "distributed-systems"
+      ]
+    },
+    {
+      "name": "rapid_mlx",
+      "url": "https://github.com/raullenchai/Rapid-MLX/releases.atom",
+      "tags": [
+        "rapid-mlx",
+        "mlx",
+        "local-models",
+        "apple-silicon",
+        "inference"
+      ]
+    },
+    {
+      "name": "mlx",
+      "url": "https://github.com/ml-explore/mlx/releases.atom",
+      "tags": [
+        "mlx",
+        "apple-silicon",
+        "local-models",
+        "inference"
+      ]
+    },
+    {
+      "name": "aws_ml_blog",
+      "url": "https://aws.amazon.com/blogs/machine-learning/feed/",
+      "tags": [
+        "aws",
+        "ml-ops",
+        "llm-applications",
+        "generative-ai",
+        "bedrock",
+        "sagemaker"
+      ]
+    },
+    {
+      "name": "aws_architecture",
+      "url": "https://aws.amazon.com/blogs/architecture/feed/",
+      "tags": [
+        "aws",
+        "architecture",
+        "ml-systems",
+        "distributed-systems"
+      ]
+    },
+    {
+      "name": "cloudflare_ai",
+      "url": "https://blog.cloudflare.com/tag/ai/rss/",
+      "tags": [
+        "cloudflare",
+        "inference",
+        "agents",
+        "llm-applications",
+        "workers-ai"
+      ]
+    },
+    {
+      "name": "netflix_tech",
+      "url": "https://netflixtechblog.com/feed",
+      "tags": [
+        "netflix",
+        "recsys",
+        "personalization",
+        "experimentation"
+      ]
+    },
+    {
+      "name": "imec_aistack",
+      "url": "https://aistack.imec-int.com/rss.xml",
+      "tags": [
+        "imec",
+        "aistack",
+        "ml-systems",
+        "hardware",
+        "agents"
+      ]
+    },
+    {
+      "name": "moonshot_kimi",
+      "url": "https://forum.moonshot.ai/c/announcement/5.rss",
+      "tags": [
+        "moonshot",
+        "kimi",
+        "china"
+      ]
+    },
+    {
+      "name": "epoch_ai",
+      "url": "https://epoch.ai/atom.xml",
+      "tags": [
+        "epoch-ai",
+        "evals",
+        "compute",
+        "benchmarks",
+        "trends"
+      ]
+    },
+    {
+      "name": "stripe_dev",
+      "url": "https://stripe.dev/blog/feed",
+      "tags": [
+        "stripe",
+        "payments",
+        "agents",
+        "fraud",
+        "fintech"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "anthropic_news",
+      "url": "https://www.anthropic.com/news",
+      "tags": [
+        "anthropic",
+        "research",
+        "product"
+      ],
+      "verified": true,
+      "link_pattern": "href=\"(/news/(?!(?:announcements|features|partnerships|policy|product|safeguards|security)\")[a-z0-9-]+)\"",
+      "base_url": "https://www.anthropic.com",
+      "date_pattern": "([A-Z][a-z]{2,8} \\d{1,2}, \\d{4})",
+      "limit": 20
+    },
+    {
+      "name": "the_batch",
+      "url": "https://www.deeplearning.ai/the-batch/",
+      "tags": [
+        "the-batch",
+        "deeplearning-ai",
+        "andrew-ng",
+        "news-roundup"
+      ],
+      "verified": true,
+      "link_pattern": "href=\"(/the-batch/issue-(\\d+))/?\"",
+      "base_url": "https://www.deeplearning.ai",
+      "date_pattern": "([A-Z][a-z]{2,8} \\d{1,2}, \\d{4})",
+      "order": "numeric",
+      "limit": 3
+    },
+    {
+      "name": "the_batch_data_points",
+      "url": "https://www.deeplearning.ai/the-batch/tag/data-points",
+      "tags": [
+        "the-batch",
+        "deeplearning-ai",
+        "andrew-ng",
+        "news-roundup",
+        "data-points"
+      ],
+      "verified": true,
+      "link_pattern": "href=\"(/the-batch/(?!tag/|about|search|issue-)[a-z0-9-]+)/?\"",
+      "base_url": "https://www.deeplearning.ai",
+      "date_pattern": "([A-Z][a-z]{2,8} \\d{1,2}, \\d{4})"
+    },
+    {
+      "name": "spotify_engineering",
+      "url": "https://engineering.atspotify.com/",
+      "tags": [
+        "spotify",
+        "engineering",
+        "data-science",
+        "ml-ops",
+        "llm-applications",
+        "experimentation"
+      ],
+      "verified": true,
+      "link_pattern": "href=\"(/20[0-9]{2}/[0-9]{1,2}/[a-z0-9-]+)/?\"",
+      "base_url": "https://engineering.atspotify.com",
+      "date_pattern": "([A-Z][a-z]{2,8} \\d{1,2}, \\d{4})"
+    },
+    {
+      "name": "spotify_research",
+      "url": "https://research.atspotify.com/publications",
+      "tags": [
+        "spotify",
+        "research",
+        "publications",
+        "recommender-systems",
+        "audio-ml",
+        "personalization",
+        "generative-recommendations"
+      ],
+      "verified": true,
+      "link_pattern": "href=\"(/publications/[a-z0-9-]+)/?\"",
+      "base_url": "https://research.atspotify.com",
+      "date_pattern": "([A-Z][a-z]{2,8} \\d{1,2}, \\d{4})"
+    },
+    {
+      "name": "deepseek_news",
+      "url": "https://api-docs.deepseek.com/news/news",
+      "tags": [
+        "deepseek",
+        "china",
+        "model-releases"
+      ],
+      "verified": true,
+      "link_pattern": "href=\"(/news/news(\\d{6}))\"",
+      "base_url": "https://api-docs.deepseek.com",
+      "order": "numeric",
+      "limit": 5
+    },
+    {
+      "name": "qwen_blog",
+      "url": "https://qwen.ai/research",
+      "tags": [
+        "qwen",
+        "alibaba",
+        "china",
+        "model-releases"
+      ],
+      "verified": false
+    },
+    {
+      "name": "cognition",
+      "url": "https://cognition.com/blog",
+      "tags": [
+        "cognition",
+        "devin",
+        "windsurf",
+        "coding-agents",
+        "agents",
+        "evals"
+      ],
+      "verified": true,
+      "link_pattern": "href=\"(/blog/[a-z0-9.-]+)\"",
+      "base_url": "https://cognition.com",
+      "date_pattern": "dateTime=\"([0-9T:+-]+)\"",
+      "limit": 15
+    },
+    {
+      "name": "artificial_analysis",
+      "url": "https://artificialanalysis.ai/articles",
+      "tags": [
+        "artificial-analysis",
+        "evals",
+        "benchmarks",
+        "llm-routing",
+        "model-releases"
+      ],
+      "verified": true,
+      "link_pattern": "href=\"(/articles/[a-z0-9-]+)\"",
+      "base_url": "https://artificialanalysis.ai",
+      "date_pattern": "([A-Z][a-z]{2,8} \\d{1,2}, \\d{4})",
+      "limit": 20
+    },
+    {
+      "name": "arena",
+      "url": "https://arena.ai/blog",
+      "tags": [
+        "arena",
+        "lmarena",
+        "evals",
+        "llm-judge",
+        "llm-routing"
+      ],
+      "verified": true,
+      "link_pattern": "href=\"(/blog/[a-z0-9-]+)\"",
+      "base_url": "https://arena.ai",
+      "limit": 6
+    }
+  ]
+}

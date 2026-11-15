@@ -1,0 +1,25 @@
+# Copy to lantern.yaml (not committed) and adjust for your Mac.
+vault: ~/Documents/Obsidian/Main
+library: ~/Library/Application Support/Lantern/library.sqlite
+model:
+  base_url: http://127.0.0.1:9000/v1
+  name: bonsai2-27b-2bit
+  timeout_s: 120
+# A cloud endpoint works too (any OpenAI-compatible server). Lantern reads its key from
+# macOS Keychain itself: name the Keychain service here and nothing else. The key never goes
+# in this file, a .env file or anything under ~/.config. Store it once (it asks for the key):
+#   security add-generic-password -s nvidia -a "$USER" -w
+# NVIDIA NIM:
+#   base_url: https://integrate.api.nvidia.com/v1
+#   name: <model id>
+#   keychain_service: nvidia
+# Claude through Anthropic's OpenAI-compatible endpoint (keep it in its own file, for example
+# ~/.config/lantern-claude.yaml, and pass it with --settings):
+#   base_url: https://api.anthropic.com/v1
+#   name: claude-sonnet-5-5
+#   keychain_service: anthropic
+#   temperature: null     # Claude 4.7 and later reject any temperature below 1, so send none
+#   max_tokens: 16000     # room for the model's thinking plus the note
+#   timeout_s: 300
+# Optional override: `api_key_env: ANTHROPIC_API_KEY` makes Lantern use that environment
+# variable instead whenever it is set (for one-off tests); otherwise it reads the Keychain.

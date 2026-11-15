@@ -1,0 +1,30 @@
+# Hosts a note may reach that are NOT in its skill's sources file.
+# build-env.py adds every host found in skills/<skill>/sources*.json to that skill's own
+# environment automatically; list here only what the weekly searches, redirects and healing
+# need. One host per line, no scheme, port or path. Hosts match exactly ("www.x.be" is not
+# "x.be"), and the API allows 128 per environment, so add a twin only where a site redirects to
+# it. Keep each entry deliberate: under limited networking this list is also the only set of
+# sites web_search and web_fetch can return.
+#
+# Each note runs in its own environment. The section a host sits under decides which
+# (add a section per note if you add more notes):
+#   [news]     -> q-lens-env   (curate-weekly, Weekly AI News Digest)
+#   [all]      -> every environment
+# Text after the section name (": ...") is just a label.
+
+[news: weekly searches in curate-weekly/interests.md]
+arxiv.org
+qwenlm.github.io
+deepseek.com
+minimax.io
+seed.bytedance.com
+ai.google.dev
+developers.googleblog.com
+docs.anthropic.com
+platform.claude.com
+ml-explore.github.io
+
+[news: redirects and healing (add the exact host a run report names as blocked)]
+# Checked 2026-11-01 by fetching every source and search host: where each one lands.
+www.minimax.io            # minimax.io
+latent.space              # www.latent.space

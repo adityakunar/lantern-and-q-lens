@@ -1,0 +1,106 @@
+# Security sources and themes. A starter list from 2026-10-25 covering two angles:
+#   1. the tools you use: Python and PyPI, GitHub and Actions, macOS, LLM tools and agents;
+#   2. general security news and research.
+# Check them any time with: uv run lantern check security
+id: security
+description: >
+  Security news and research that matters to one engineer who runs Python (uv, PyPI),
+  GitHub and GitHub Actions, macOS on Apple Silicon, local LLMs (MLX, rapid-mlx, LiteLLM)
+  and AI agents. First priority: vulnerabilities, supply-chain attacks and advisories that
+  touch those tools, and practical attacks on LLM apps and agents (prompt injection, tool
+  abuse, data exfiltration). Second: the week's most important wider incidents and new
+  research techniques. Skip vendor marketing, generic "top tips" lists, funding news and
+  routine breach notices without lessons.
+
+themes:
+  ai-security: [prompt injection, jailbreak, llm security, agent security, data exfiltration, model poisoning, ai red teaming, mcp]
+  supply-chain: [supply chain, malicious package, typosquatting, pypi, npm, dependency confusion, github actions, ci cd, sbom]
+  vulnerabilities: [vulnerability, cve, zero day, 0day, remote code execution, rce, patch, exploited in the wild]
+  apple-macos: [macos, ios, apple silicon, xprotect, gatekeeper, apple security update]
+  appsec: [web security, xss, ssrf, request smuggling, deserialization, authentication bypass, oauth]
+  malware: [malware, ransomware, infostealer, botnet, backdoor, bootkit]
+  identity-cloud: [phishing, passkeys, credential, session hijacking, cloud security, aws, iam, token theft]
+  research: [exploitation, fuzzing, reverse engineering, vulnerability research, exploit chain]
+  privacy-policy: [privacy, surveillance, regulation, disclosure policy, encryption]
+
+sources:
+  # ── The tools you use ─────────────────────────────────────────────────────
+  github_security:
+    type: feed
+    url: https://github.blog/security/feed/
+    tags: [github, supply-chain, actions]
+    notes: GitHub's security blog (advisories, Actions hardening, research). Verified 2026-10-25.
+  pypi_blog:
+    type: feed
+    url: https://blog.pypi.org/feed_rss_created.xml
+    tags: [pypi, python, supply-chain]
+    notes: PyPI's own blog, including malware and account-security incidents. Verified 2026-10-25.
+  embrace_the_red:
+    type: feed
+    url: https://embracethered.com/blog/index.xml
+    tags: [ai-security, prompt-injection, agents]
+    notes: Practical attacks on LLM apps and coding agents. Verified 2026-10-25.
+  simon_willison_prompt_injection:
+    type: feed
+    url: https://simonwillison.net/tags/prompt-injection.atom
+    tags: [ai-security, prompt-injection]
+    notes: Simon Willison's prompt-injection tag only. Verified 2026-10-25.
+  eighth_rank:
+    type: page
+    index_url: https://8rank.ai/research
+    link_pattern: 'href="(/game/[a-z0-9-]+)"'
+    base_url: https://8rank.ai
+    date_pattern: 'datetime="([0-9-]+)"'
+    limit: 10
+    tags: [apple-macos, privacy, ai-security, research]
+    notes: >-
+      Eighth Rank (8rank.ai), security and privacy research on Apple Intelligence and
+      personalized AI, e.g. "Weaponizing Personalization: From Knowledge Graph to Extortion"
+      (28 Oct 2026). No feed or sitemap; robots.txt allows all and the /research listing is
+      server-rendered with dates, so this reads every post rather than one article. Low volume
+      (2 posts so far). Added 2026-11-11.
+  trail_of_bits:
+    type: feed
+    url: https://blog.trailofbits.com/feed/
+    tags: [research, ai-security, supply-chain, python]
+    notes: Deep technical research, often on Python tooling and AI systems. Verified 2026-10-25.
+
+  # ── General news and research ─────────────────────────────────────────────
+  krebs:
+    type: feed
+    url: https://krebsonsecurity.com/feed/
+    tags: [news, investigations]
+    notes: Investigative security journalism. Verified 2026-10-25.
+  schneier:
+    type: feed
+    url: https://www.schneier.com/feed/atom/
+    tags: [commentary, policy]
+    notes: Commentary and policy; includes a weekly off-topic squid post the judge should drop. Verified 2026-10-25.
+  bleepingcomputer:
+    type: feed
+    url: https://www.bleepingcomputer.com/feed/
+    tags: [news, incidents]
+    notes: High-volume breaking news; the source cap keeps it to three. Verified 2026-10-25.
+  project_zero:
+    type: feed
+    url: https://projectzero.google/feed.xml
+    max_mb: 16  # full-content feed of every post, about 11 MB
+    tags: [research, vulnerabilities, google]
+    notes: Google Project Zero (moved from Blogspot). Verified 2026-10-25.
+  google_security_blog:
+    type: feed
+    url: https://feeds.feedburner.com/GoogleOnlineSecurityBlog
+    tags: [google, research, identity]
+    notes: Google Online Security Blog. Verified 2026-10-25.
+  portswigger_research:
+    type: feed
+    url: https://portswigger.net/research/rss
+    tags: [appsec, research]
+    notes: Web security research (PortSwigger, makers of Burp Suite). Verified 2026-10-25.
+  owasp_cheat_sheets:
+    type: feed
+    url: https://github.com/OWASP/CheatSheetSeries/commits/master.atom
+    tags: [owasp, appsec, guidance]
+    notes: >-
+      OWASP Cheat Sheet Series. The site has no feed, so this follows the repo's commits:
+      new and revised cheat sheets, plus some build noise that judging drops. Added 2026-10-26.
