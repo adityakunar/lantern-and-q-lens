@@ -1,4 +1,4 @@
-"""`lantern run | why | check | status | benchmark` (contracts/cli.md)."""
+"""`lantern run | why | check | status | benchmark` (see README.md)."""
 
 from __future__ import annotations
 

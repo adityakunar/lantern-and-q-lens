@@ -29,7 +29,8 @@ a fetched page may contain instructions aimed at the model.
 
 - Lantern fetches only the sources in `lantern/interests/*.yaml` and sends titles and
   excerpts to the model endpoint you configure. It writes to your vault folder and its own
-  library file, nowhere else.
+  library file and, if you install the weekly schedule, a health record and a log; nowhere
+  else.
 - The note is checked in code after the model writes it: every link must be one that was
   given to the model, exactly once.
 

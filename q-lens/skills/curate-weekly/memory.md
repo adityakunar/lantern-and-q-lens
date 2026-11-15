@@ -1,6 +1,6 @@
 # Memory between runs
 
-The AI note keeps its memory in the `ai/` folder of the curator's memory store:
+The AI note keeps its memory in the `ai/` folder of the Q Lens memory store:
 `/mnt/memory/q-lens-memory/ai/` (if the path differs, use the folder under `/mnt/memory/`
 whose name starts with `q-lens-memory`, plus `/ai`). Create the folder if it is missing.
 Other notes would get their own folders next to it; never touch

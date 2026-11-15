@@ -16,6 +16,8 @@ lantern.yaml
 # `ant apply` writes the IDs of YOUR agent, deployment, environment and memory store here.
 claude-lock.json
 
+# Notes and the library from the example settings (lantern/lantern.example.yaml)
+/lantern/output/
 # Notes go to the Obsidian vault, never here
 *.note.md
 /q-lens/outputs/

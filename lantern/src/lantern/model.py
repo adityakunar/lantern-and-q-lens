@@ -1,4 +1,4 @@
-"""The one model endpoint: any OpenAI-compatible local server (contracts/model-endpoint.md)."""
+"""The one model endpoint: any OpenAI-compatible local server."""
 
 from __future__ import annotations
 

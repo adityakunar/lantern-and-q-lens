@@ -1,6 +1,6 @@
 # Healing broken sources
 
-(Shared by every curator skill: edit it in `shared/`, never in a skill folder.)
+(Shared by every Q Lens skill: edit it in `shared/`, never in a skill folder.)
 
 The run should repair what it can, route around what it can't, and tell the reader both.
 The skill's collector script does the mechanical part and keeps the state in the memory store

@@ -1,4 +1,4 @@
-"""The Library: one SQLite file holding items, runs, decisions and notes (data-model.md)."""
+"""The Library: one SQLite file holding items, runs, decisions and notes (docs/design.md)."""
 
 from __future__ import annotations
 

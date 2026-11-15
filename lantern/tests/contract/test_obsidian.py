@@ -1,4 +1,4 @@
-"""The Obsidian Output honours contracts/note-format.md and slots.md."""
+"""The Obsidian delivery target writes the note as docs/design.md describes."""
 
 from datetime import UTC, datetime
 

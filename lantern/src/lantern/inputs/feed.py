@@ -8,7 +8,7 @@ import feedparser
 
 from ..items import Item, SourceError, parse_date, strip_html
 
-type = "feed"  # noqa: A001 - the slot's registry key
+type = "feed"  # noqa: A001 - the registry key
 
 _SPONSORED = ("sponsored", "partner content", "advertorial", "[ad]")
 

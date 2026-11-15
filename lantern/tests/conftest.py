@@ -1,4 +1,4 @@
-"""Shared fakes: no test touches the network or a real model (constitution VI)."""
+"""Shared fakes: no test touches the network or a real model ."""
 
 from __future__ import annotations
 

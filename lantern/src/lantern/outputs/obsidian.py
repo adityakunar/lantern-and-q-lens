@@ -9,7 +9,7 @@ from typing import Any
 
 import yaml
 
-type = "obsidian"  # noqa: A001 - the slot's registry key
+type = "obsidian"  # noqa: A001 - the registry key
 
 
 class VaultMissing(Exception):

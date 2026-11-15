@@ -34,6 +34,9 @@ instead of the reader's own. Q Lens started with an empty memory, so it knew not
 earlier weeks. The two weeks below ran on the author's own setup, so this week is not an
 exact repeat of them.
 
+Both notes, and the table `lantern benchmark` built from them, are in
+[examples/2026-11-15/](../examples/2026-11-15/).
+
 | | Lantern | Q Lens |
 |---|---:|---:|
 | Cost | $0.40 | $2.11 (5.3 times as much) |
@@ -153,5 +156,5 @@ scored 9 or 10.
 Each note starts with a block of properties that record its own run: `run_seconds`,
 `run_model_calls`, `run_tokens_in`, `run_tokens_out` and `run_cost_usd`. The command
 `uv run lantern benchmark`, run in the `lantern/` folder, reads the notes of both programs
-from the vault (the folder of Markdown notes they are saved to) and writes one table of all
-runs to `Lantern/Benchmark.md` in that vault.
+from the vault (the folder the notes are saved to; `lantern/output/notes` with the example
+settings) and writes one table of all runs to `Lantern/Benchmark.md` in that vault.

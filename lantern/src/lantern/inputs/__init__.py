@@ -1,4 +1,4 @@
-"""Input slot: source types that turn a configured source into Items (contracts/slots.md)."""
+"""Source types: turn a configured source into Items (docs/design.md)."""
 
 from __future__ import annotations
 

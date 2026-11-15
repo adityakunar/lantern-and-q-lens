@@ -1,4 +1,4 @@
-"""Load and validate settings, interests, recipes and lenses (contracts/config.md)."""
+"""Load and validate settings, interests, recipes and lenses (see lantern.example.yaml)."""
 
 from __future__ import annotations
 
