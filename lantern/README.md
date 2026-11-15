@@ -125,6 +125,7 @@ ignores:
 ```text
 lantern/output/
 ├── library.sqlite                 the library: items, decisions with reasons, runs, notes
+├── library.sqlite.lock            stops two runs from using the library at once
 └── notes/                         the vault
     └── Lantern/
         ├── AI news/Lantern/
@@ -133,13 +134,14 @@ lantern/output/
 ```
 
 - `run` writes the note and adds the run, its items and every decision to the library. A
-  second run in the same week replaces that week's note. A dry run writes nothing.
+  second run in the same week replaces that week's note. A dry run writes nothing, not even the library.
 - The note starts with properties (YAML front matter): reader properties such as `week` and
   `tags`, then `run_*` properties that record the run: sources checked and failed, items
   seen, judged and picked, seconds, model calls, tokens and cost.
 - `why` and `status` only read. `benchmark` rebuilds `Benchmark.md` from the `run_*`
   properties of every note under `Lantern/`, including Q Lens's notes if you fetch them into
-  the same folder (see [q-lens/README.md](../q-lens/README.md)).
+  the same folder (see [q-lens/README.md](../q-lens/README.md)). A note written without a
+  model shows `?` for cost and tokens there, because no model was called.
 - The library's tables are described in [docs/design.md](docs/design.md#what-lantern-stores).
 
 **If you use Obsidian, or run Lantern on a schedule.** Set `vault:` to your Obsidian vault and
