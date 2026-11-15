@@ -8,7 +8,7 @@ from urllib.parse import urljoin
 
 from ..items import Item, SourceError, parse_date, strip_html
 
-type = "page"  # noqa: A001 - the slot's registry key
+type = "page"  # noqa: A001 - the registry key
 
 _KEYS = {
     "type", "index_url", "link_pattern", "base_url", "date_pattern", "order", "limit",

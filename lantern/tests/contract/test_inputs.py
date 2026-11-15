@@ -1,4 +1,4 @@
-"""Every registered Input honours contracts/slots.md."""
+"""Every registered source type behaves as docs/design.md describes."""
 
 from datetime import UTC, datetime
 

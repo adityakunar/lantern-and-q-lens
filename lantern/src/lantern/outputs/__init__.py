@@ -1,4 +1,4 @@
-"""Output slot: where a finished note goes (contracts/slots.md)."""
+"""Delivery targets: where a finished note goes (docs/design.md)."""
 
 from __future__ import annotations
 

@@ -1,7 +1,7 @@
 """`lantern benchmark`: one table comparing what each weekly note cost and how long it took.
 
-Reads the run_* properties of every note under <vault>/Lantern, whether Lantern wrote it or the
-news curator agent did (its fetch script adds the same properties), and rewrites
+Reads the run_* properties of every note under <vault>/Lantern, whether Lantern wrote it or Q Lens
+did (its fetch script adds the same properties), and rewrites
 <vault>/Lantern/Benchmark.md. Rebuilt from the notes each time, so it is safe to run often.
 """
 
