@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://platform.claude.com/schemas/ant/beta/deployment.json
-name: Weekly AI News Digest
+name: Q Lens weekly AI note
 agent: ../agents/q-lens.md
 environment_id: ../environments/q-lens-env.yml
 resources:
