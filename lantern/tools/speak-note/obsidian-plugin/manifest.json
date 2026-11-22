@@ -1,0 +1,9 @@
+{
+  "id": "speak-note",
+  "name": "Speak note",
+  "version": "0.2.0",
+  "minAppVersion": "1.0.0",
+  "description": "Read the current note aloud with a local Kokoro voice (runs speak_note.py from this plugin's folder).",
+  "author": "Lantern",
+  "isDesktopOnly": true
+}
