@@ -162,6 +162,12 @@ tokens and cost. The details, with file trees, are in
 [examples/](examples/) holds copies of one week's notes, and
 [benchmark/README.md](benchmark/README.md) is a summary written by hand.
 
+## Nice to have: hear a note
+
+[lantern/tools/speak-note](lantern/tools/speak-note/README.md) reads a note aloud on your Mac
+with a small voice model running locally, from the terminal or from a button in Obsidian. It
+works on any Markdown note, not only these, and nothing in either program depends on it.
+
 ## Small enough to follow
 
 ```text
